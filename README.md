@@ -42,7 +42,7 @@ and send the result together with the code.
 
 1. Make sure that you have `node` installed on your computer.
 2. Fork and clone this repo on your computer.
-3. `cd` into the root directory and run ` npm index.js`.
+3. `cd` into the root directory and run ` node index.js`.
 4. Check the differents inputs for `index.js`.
 
 
