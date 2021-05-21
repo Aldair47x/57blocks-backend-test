@@ -4,63 +4,61 @@ const RANDOM_TRANSLATOR = require("./strings-translator");
 
 
 
-const randomOutputValues = (data={}, config="") => {
+const randomOutputValues = (data = {}, config = "") => {
 
-    let dataConverted = {...data};
-
+    let dataConverted = {
+        ...data
+    };
     
+    let stringConfigConverted = [];
 
     // debugger
-    const stringConfigConverted = config.split('/');
-
-    if(config == ""){
-        return `There isn't a properties in config to search on the data`;
+    if (typeof (data) == "object" && typeof (config) == "string") {
+        stringConfigConverted = config.split('/');
+    } else {
+        return `Bad input entered, please check the correct format`;
     }
 
-    
+    if (config == "" || Object.keys(data).length == 0) {
+        return `There isn't a properties in data or config`;
+    }
+
+    if (stringConfigConverted.length > 10) {
+        return `The maximum nest level of objects hierarchy is 10`;
+    }
+
+
 
     stringConfigConverted.forEach(element => {
 
-        // console.log(typeof(dataConverted[element]))
-
-        if(typeof(dataConverted[element]) === "undefined"){
+        if (typeof (dataConverted[element]) === "undefined") {
             console.log(`There isn't a property ${element} in config to match on the ${JSON.stringify(dataConverted)}`);
             process.exit();
         }
-        
-        
-        if(dataConverted[element]){
+
+
+        if (dataConverted[element]) {
             dataConverted = dataConverted[element];
         }
 
-        if(typeof(dataConverted) == 'string'){
-            if(RANDOM_TRANSLATOR[dataConverted]) {
-                dataConverted = RANDOM_TRANSLATOR[dataConverted];
-            } else {
-                dataConverted = "random string converted 57blocks " + Math.random().toString(36).substring(4);
-            }
-        }
-
-        if(typeof(dataConverted) == 'number'){
-            dataConverted *= 3.14159265359;
-        }
-        // console.log("\n",dataConverted);
-        
     });
 
-    // console.log(typeof(dataConverted), "\n", dataConverted);
+    if (typeof (dataConverted) == 'string') {
+        if (RANDOM_TRANSLATOR[dataConverted]) {
+            dataConverted = RANDOM_TRANSLATOR[dataConverted];
+        } else {
+            dataConverted = `random string converted ${Math.random().toString(36).substring(4)} - 57blocks no matched on the translator ${dataConverted}`;
+        }
+    }
+
+    if (typeof (dataConverted) == 'number') {
+        dataConverted *= 3.14159265359;
+    }
+
+
 
     return dataConverted;
 
-
-
-    
-
-
-    
-
-
-    
 }
 
 module.exports = randomOutputValues;
