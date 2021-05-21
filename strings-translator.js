@@ -1,0 +1,7 @@
+const RANDOM_TRANSLATOR = {
+    "COP": "PESO COLOMBIANO",
+    "USD": "DOLAR ESTADOUNIDENSE",
+    
+}
+
+module.exports = RANDOM_TRANSLATOR;
