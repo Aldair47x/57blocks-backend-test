@@ -16,7 +16,7 @@ const randomOutputValues = (data = {}, config = "") => {
     if (typeof (data) == "object" && typeof (config) == "string") {
         stringConfigConverted = config.split('/');
     } else {
-        return `Bad input entered, please check the correct format`;
+        return `Bad input entered, please check the correct format randomOutputValues(argument1/argument2/argumentn...)`;
     }
 
     if (config == "" || Object.keys(data).length == 0) {
